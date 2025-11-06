@@ -1,5 +1,5 @@
 {
-  "xsappname" : "helloworld",
+  "xsappname" : "hello-service",
   "tenant-mode" : "dedicated",
   "oauth2-configuration": {
     "redirect-uris": [

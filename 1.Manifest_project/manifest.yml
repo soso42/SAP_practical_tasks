@@ -1,8 +1,8 @@
 ---
 applications:
-  - name: helloworld
+  - name: hello-service
     routes:
-      - route: helloworld-soso.cfapps.us10-001.hana.ondemand.com
+      - route: hello-service.cfapps.us10-001.hana.ondemand.com
 #    random-route: true
     path: ./target/java-tutorial-0.0.1-SNAPSHOT.jar
     memory: 1024M
@@ -15,7 +15,7 @@ applications:
     services:
       - javauaa
 
-  - name: web
+  - name: app-router
     random-route: true
     path: web
     memory: 1024M
@@ -23,8 +23,8 @@ applications:
       destinations: >
         [
           {
-            "name":"helloworld",
-            "url":"https://helloworld-soso.cfapps.us10-001.hana.ondemand.com/",
+            "name":"hello-service",
+            "url":"https://hello-service.cfapps.us10-001.hana.ondemand.com/",
             "forwardAuthToken": true
           }
         ]
