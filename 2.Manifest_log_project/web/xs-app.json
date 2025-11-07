@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "source": "^/hello-service/(.*)$",
+      "target": "$1",
+      "destination": "hello-service"
+    }
+  ]
+}
