@@ -16,7 +16,9 @@ applications:
       - xsuaa-service
 
   - name: app-router
-    random-route: true
+    routes:
+      - route: app-router-humble-chimpanzee-xb.cfapps.us10-001.hana.ondemand.com
+#    random-route: true
     path: web
     memory: 1024M
     env:
