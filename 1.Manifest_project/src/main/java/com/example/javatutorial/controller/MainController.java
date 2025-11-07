@@ -10,16 +10,24 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import com.sap.cloud.security.xsuaa.token.Token;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping(path = "")
 public class MainController {
 
     @GetMapping(path = "")
-    public ResponseEntity<String> readAll(@AuthenticationPrincipal Token token) {
+    public ResponseEntity<?> readAll(@AuthenticationPrincipal Token token) {
         if (!token.getAuthorities().contains(new SimpleGrantedAuthority("Display"))) {
             throw new NotAuthorizedException("This operation requires \"Display\" scope");
         }
 
-        return new ResponseEntity<String>("Hello World! redeployed app!", HttpStatus.OK);
+        Map<String, String> result = new HashMap<>();
+        result.put("Logged in user authorities", token.getAuthorities().toString());
+        result.put("Logged in user email", token.getEmail());
+        result.put("Logged in user id", token.getClientId());
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
