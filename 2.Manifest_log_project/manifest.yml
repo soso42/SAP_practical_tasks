@@ -14,6 +14,7 @@ applications:
       JBP_CONFIG_SAP_MACHINE_JDK : "{ version: 21.+ }"
     services:
       - xsuaa-service
+      - logging-service
 
   - name: app-router
     routes:
@@ -32,13 +33,4 @@ applications:
         ]
     services:
       - xsuaa-service
-
-
-services:
-  - name: xsuaa-service
-    type: managed
-    broker: sap
-    plan: application
-    parameters:
-      path: ./xs-security.json
 
