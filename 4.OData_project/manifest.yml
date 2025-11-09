@@ -1,0 +1,19 @@
+---
+applications:
+  - name: app-router
+    routes:
+      - route: app-router.cfapps.us10-001.hana.ondemand.com
+#    random-route: true
+    path: app-router
+    memory: 1024M
+    env:
+      destinations: >
+        [
+          {
+            "name":"hello-service",
+            "url":"https://hello-service.cfapps.us10-001.hana.ondemand.com/",
+            "forwardAuthToken": true
+          }
+        ]
+    services:
+      - xsuaa-service
