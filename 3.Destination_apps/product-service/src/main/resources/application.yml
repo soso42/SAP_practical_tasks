@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: product-service
+  security:
+    user:
+      name: admin
+      password: 1
+      roles: USER

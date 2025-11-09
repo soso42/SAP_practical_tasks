@@ -1,0 +1,71 @@
+package com.example.helloservice.controller;
+
+import com.example.helloservice.exception.NotAuthorizedException;
+import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationAccessor;
+import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
+import com.sap.cloud.sdk.cloudplatform.connectivity.HttpDestination;
+import io.micrometer.core.instrument.util.IOUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import com.sap.cloud.security.xsuaa.token.Token;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping(path = "")
+@Slf4j
+public class MainController {
+
+    @GetMapping(path = "")
+    public ResponseEntity<?> readAll(@AuthenticationPrincipal Token token) {
+
+        if (!token.getAuthorities().contains(new SimpleGrantedAuthority("Display"))) {
+            log.info("User {} was denied entry", token.getEmail());
+            throw new NotAuthorizedException("This operation requires \"Display\" scope");
+        }
+
+        log.info("User {} was logged in", token.getEmail());
+
+        String responseString = "";
+        try {
+            HttpDestination destination = DestinationAccessor.getLoader().tryGetDestination("product-service")
+                    .get().asHttp();
+            HttpClient client = HttpClientAccessor.getHttpClient(destination);
+            HttpGet httpGet = new HttpGet("/hello");
+            HttpResponse httpResponse = client.execute(httpGet);
+            responseString = IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8);
+        } catch (ClientProtocolException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Map<String, String> result = new HashMap<>();
+        result.put("responseString", responseString);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/check-destination")
+    public String checkDestination() {
+        try {
+            HttpDestination dest = DestinationAccessor.getDestination("product-service").asHttp();
+            return "Destination found: " + dest.getUri();
+        } catch (Exception e) {
+            return "Destination not found: " + e.getMessage();
+        }
+    }
+}
