@@ -20,6 +20,14 @@ public class WebSecurityConfig {
     @Autowired
     XsuaaServiceConfiguration xsuaaServiceConfiguration;
 
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+//                .csrf(csrf -> csrf.disable());
+//        return http.build();
+//    }
+
     @SuppressWarnings({ "removal", "deprecation" })
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

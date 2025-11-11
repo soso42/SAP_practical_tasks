@@ -67,6 +67,24 @@
             <version>5.24.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.sap.cloud.sdk.datamodel</groupId>
+            <artifactId>odata-v4-core</artifactId>
+            <version>5.24.0</version>
+        </dependency>
+
+        <!-- Apache Olingo V4 client -->
+        <dependency>
+            <groupId>org.apache.olingo</groupId>
+            <artifactId>odata-client-core</artifactId>
+            <version>4.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.olingo</groupId>
+            <artifactId>odata-client-api</artifactId>
+            <version>4.9.0</version>
+        </dependency>
+
         <!-- dependencies for test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -94,6 +112,58 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+
+            <!--  Generate classes from edmx  -->
+            <plugin>
+                <groupId>com.sap.cloud.sdk.datamodel</groupId>
+                <artifactId>odata-v4-generator-maven-plugin</artifactId>
+                <version>5.24.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-vdm</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Use a local folder containing your EDMX / metadata file(s) -->
+                    <inputDirectory>${project.basedir}/src/main/resources/edmx</inputDirectory>
+                    <!-- Where generated sources will go -->
+                    <outputDirectory>${project.basedir}/target/classes</outputDirectory>
+                    <!-- Package for generated code -->
+                    <packageName>com.example.helloservice.vdm</packageName>
+                    <!-- Optional: override the default API path if needed -->
+                    <defaultBasePath>/sap/opu/odata/sap/API_PRODUCT_SRV</defaultBasePath>
+                    <!-- Clean output before generation -->
+                    <deleteOutputDirectory>true</deleteOutputDirectory>
+                    <!-- Generate service methods per entity set -->
+                    <serviceMethodsPerEntitySet>true</serviceMethodsPerEntitySet>
+                </configuration>
+            </plugin>
+
+            <!-- load generated classes  -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>add-generated-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.basedir}/target/classes</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

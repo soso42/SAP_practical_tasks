@@ -1,10 +1,9 @@
 package com.example.helloservice.controller;
 
 import com.example.helloservice.exception.NotAuthorizedException;
-import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationAccessor;
-import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
-import com.sap.cloud.sdk.cloudplatform.connectivity.HttpDestination;
+import com.sap.cloud.sdk.cloudplatform.connectivity.*;
 import io.micrometer.core.instrument.util.IOUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -14,10 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import com.sap.cloud.security.xsuaa.token.Token;
+
+import com.example.helloservice.vdm.namespaces.productsrv.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -25,9 +25,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "")
 @Slf4j
-public class MainController {
+@RequiredArgsConstructor
+public class TestController {
+
 
     @GetMapping(path = "")
     public ResponseEntity<?> readAll(@AuthenticationPrincipal Token token) {
@@ -68,4 +69,5 @@ public class MainController {
             return "Destination not found: " + e.getMessage();
         }
     }
+
 }
