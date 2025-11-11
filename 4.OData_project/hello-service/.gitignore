@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Files only for local environment
+src/main/resources/default-env.json
