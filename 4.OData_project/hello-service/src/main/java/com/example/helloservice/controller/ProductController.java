@@ -28,7 +28,7 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Product>> getTopProducts() {
         List<Product> products = productService.getTopProducts(10);
         return new ResponseEntity<>(products, HttpStatus.OK);

@@ -1,6 +1,9 @@
 spring:
   application:
     name: hello-service
+  mvc:
+    contentnegotiation:
+      default-content-type: application/json
 
 management:
   endpoints:

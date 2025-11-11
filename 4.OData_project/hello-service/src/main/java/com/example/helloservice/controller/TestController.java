@@ -61,12 +61,12 @@ public class TestController {
     }
 
     @GetMapping("/check-destination")
-    public String checkDestination() {
+    public Map<String, String> checkDestination() {
         try {
             HttpDestination dest = DestinationAccessor.getDestination("product-service").asHttp();
-            return "Destination found: " + dest.getUri();
+            return Map.of("Destination found: ", dest.getUri().toString());
         } catch (Exception e) {
-            return "Destination not found: " + e.getMessage();
+            return Map.of("Destination not found: ", e.getMessage());
         }
     }
 
