@@ -10,14 +10,13 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import com.sap.cloud.security.xsuaa.token.Token;
-
-import com.example.helloservice.vdm.namespaces.productsrv.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -30,7 +29,7 @@ import java.util.Map;
 public class TestController {
 
 
-    @GetMapping(path = "")
+    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> readAll(@AuthenticationPrincipal Token token) {
 
         if (!token.getAuthorities().contains(new SimpleGrantedAuthority("Display"))) {
@@ -60,7 +59,7 @@ public class TestController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/check-destination")
+    @GetMapping(path = "/check-destination", produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> checkDestination() {
         try {
             HttpDestination dest = DestinationAccessor.getDestination("product-service").asHttp();

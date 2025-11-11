@@ -1,7 +1,7 @@
 package com.example.helloservice.service.impl;
 
+import com.example.helloservice.dto.ProductDTO;
 import com.example.helloservice.service.ProductService;
-import com.example.helloservice.vdm.namespaces.productsrv.Product;
 import org.apache.olingo.client.api.ODataClient;
 import org.apache.olingo.client.api.communication.response.ODataRetrieveResponse;
 import org.apache.olingo.client.api.domain.ClientEntity;
@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     private final ODataClient client = ODataClientFactory.getClient();
 
 
-    public Product getProductById(Long id) {
+    public ProductDTO getProductById(Long id) {
         URIBuilder uriBuilder = client.newURIBuilder(SERVICE_ROOT)
                 .appendEntitySetSegment("Products")
                 .appendKeySegment(id);
@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
         return productMapper(entity);
     }
 
-    public List<Product> getTopProducts(int top) {
+    public List<ProductDTO> getTopProducts(int top) {
         URIBuilder uriBuilder = client.newURIBuilder(SERVICE_ROOT)
                 .appendEntitySetSegment("Products")
                 .top(top);
@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
 
         ClientEntitySet entitySet = response.getBody();
 
-        List<Product> result = new ArrayList<>();
+        List<ProductDTO> result = new ArrayList<>();
         for (ClientEntity entity : entitySet.getEntities()) {
             result.add(productMapper(entity));
         }
@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
         return result;
     }
 
-    private Product productMapper(ClientEntity entity) {
+    private ProductDTO productMapper(ClientEntity entity) {
         // Safe extraction with null checks
         Integer id = null;
         if (entity.getProperty("ProductID") != null && entity.getProperty("ProductID").getValue() != null) {
@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
             else price = new BigDecimal(v.toString());
         }
 
-        return new Product(id, name, null, null, null, price, null, null, null, null, null, null, null);
+        return new ProductDTO(id, name, price);
     }
 
 }
