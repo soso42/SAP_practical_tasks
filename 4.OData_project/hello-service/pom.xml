@@ -62,6 +62,7 @@
             <version>3.5.0</version>
         </dependency>
 
+        <!--  SAP -->
         <dependency>
             <groupId>com.sap.cloud.sdk</groupId>
             <artifactId>sdk-core</artifactId>

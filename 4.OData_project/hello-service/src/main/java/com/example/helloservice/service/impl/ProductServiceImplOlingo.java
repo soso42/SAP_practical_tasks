@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImplOlingo implements ProductService {
 
     private static final String SERVICE_ROOT = "https://services.odata.org/V4/Northwind/Northwind.svc/";
 

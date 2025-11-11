@@ -1,7 +1,7 @@
 package com.example.helloservice.controller;
 
 import com.example.helloservice.dto.ProductDTO;
-import com.example.helloservice.service.impl.ProductServiceImpl;
+import com.example.helloservice.service.impl.ProductServiceImplOlingo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductControllerOlingo {
 
-    private final ProductServiceImpl productService;
+    private final ProductServiceImplOlingo productService;
 
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

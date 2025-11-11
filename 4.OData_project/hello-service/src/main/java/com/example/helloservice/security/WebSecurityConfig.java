@@ -20,34 +20,34 @@ public class WebSecurityConfig {
     @Autowired
     XsuaaServiceConfiguration xsuaaServiceConfiguration;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-                .csrf(csrf -> csrf.disable());
-        return http.build();
-    }
-
-//    @SuppressWarnings({ "removal", "deprecation" })
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//
 //        http
-//                .sessionManagement()
-//                // session is created by approuter
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                // demand specific scopes depending on intended request
-//                .authorizeRequests()
-//
-//                .requestMatchers("/**").authenticated()
-//                .anyRequest().denyAll() // deny anything not configured above
-//                .and()
-//                .oauth2ResourceServer().jwt()
-//                .jwtAuthenticationConverter(getJwtAuthoritiesConverter());
-//
+//                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+//                .csrf(csrf -> csrf.disable());
 //        return http.build();
 //    }
+
+    @SuppressWarnings({ "removal", "deprecation" })
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http
+                .sessionManagement()
+                // session is created by approuter
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                // demand specific scopes depending on intended request
+                .authorizeRequests()
+
+                .requestMatchers("/**").authenticated()
+                .anyRequest().denyAll() // deny anything not configured above
+                .and()
+                .oauth2ResourceServer().jwt()
+                .jwtAuthenticationConverter(getJwtAuthoritiesConverter());
+
+        return http.build();
+    }
 
     /**
      * Customizes how GrantedAuthority are derived from a Jwt
