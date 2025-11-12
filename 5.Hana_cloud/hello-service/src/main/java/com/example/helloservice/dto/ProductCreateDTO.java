@@ -9,9 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
+public class ProductCreateDTO {
 
-    private Integer id;
     private String name;
     private Integer price;
 

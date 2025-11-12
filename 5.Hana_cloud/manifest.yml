@@ -13,6 +13,11 @@ applications:
             "name":"hello-service",
             "url":"https://hello-service.cfapps.us10-001.hana.ondemand.com/",
             "forwardAuthToken": true
+          },
+          {
+            "name":"product-service",
+            "url":"https://product-service.cfapps.us10-001.hana.ondemand.com/",
+            "forwardAuthToken": true
           }
         ]
     services:
