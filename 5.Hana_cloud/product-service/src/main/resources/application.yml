@@ -1,8 +1,20 @@
 spring:
+
   application:
     name: product-service
+
   security:
     user:
       name: admin
       password: 1
       roles: USER
+
+  datasource:
+    url: jdbc:sap://07ce5417-4857-4bbb-9f82-9db897f5c348.hana.trial-us10.hanacloud.ondemand.com:443
+    username: DBADMIN
+    password: User1234
+    driver-class-name: com.sap.db.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
