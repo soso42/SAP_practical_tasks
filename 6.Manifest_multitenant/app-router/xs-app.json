@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "source": "^/hello-service/(.*)$",
+      "target": "$1",
+      "destination": "hello-service"
+    },
+    {
+      "source": "^/product-service/(.*)$",
+      "target": "$1",
+      "destination": "product-service"
+    }
+  ]
+}
