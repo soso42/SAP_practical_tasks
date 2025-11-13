@@ -41,7 +41,6 @@
 
     <!-- List of modules in this project -->
     <modules>
-        <module>hello-service</module>
         <module>product-service</module>
     </modules>
 
