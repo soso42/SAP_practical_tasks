@@ -1,6 +1,6 @@
-package com.example.helloservice.controller;
+package com.example.productservice.controller;
 
-import com.example.helloservice.exception.NotAuthorizedException;
+import com.example.productservice.exception.NotAuthorizedException;
 import com.sap.cloud.sdk.cloudplatform.connectivity.*;
 import io.micrometer.core.instrument.util.IOUtils;
 import lombok.RequiredArgsConstructor;
