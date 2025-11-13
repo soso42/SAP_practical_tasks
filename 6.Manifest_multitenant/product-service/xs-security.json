@@ -1,6 +1,6 @@
 {
   "xsappname" : "xsuaa-service",
-  "tenant-mode" : "dedicated",
+  "tenant-mode" : "shared",
   "scopes": [
     {
       "name": "$XSAPPNAME.Display",

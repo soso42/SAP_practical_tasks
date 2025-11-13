@@ -1,0 +1,15 @@
+{
+  "appName": "product-service",
+  "displayName": "My Multi-tenant App",
+  "description": "SaaS app for demonstration",
+  "category": "Custom Apps",
+  "xsappname": "xsuaa-service",
+  "tenantMode": "shared",
+  "appUrls": {
+    "onSubscription": "https://product-service.cfapps.us10-001.hana.ondemand.com/callback/tenants/{tenantId}",
+    "onSubscriptionAsync": false,
+    "onUnSubscription": "https://product-service.cfapps.us10-001.hana.ondemand.com/callback/tenants/{tenantId}",
+    "onUnSubscriptionAsync": false,
+    "getDependencies": "https://product-service.cfapps.us10-001.hana.ondemand.com/callback/dependencies"
+  }
+}

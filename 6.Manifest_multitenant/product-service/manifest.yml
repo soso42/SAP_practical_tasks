@@ -13,3 +13,6 @@ applications:
       JBP_CONFIG_SAP_MACHINE_JDK : "{ version: 21.+ }"
     services:
       - destination-service
+      - xsuaa-service
+      - logging-service
+      - saas-registry
