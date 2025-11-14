@@ -24,14 +24,15 @@ public class TestController {
     @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> readAll(@AuthenticationPrincipal Token token) {
 
-        if (!token.getAuthorities().contains(new SimpleGrantedAuthority("Display"))) {
-            log.info("User {} was denied entry", token.getEmail());
-            throw new NotAuthorizedException("This operation requires \"Display\" scope");
-        }
-
-        log.info("User {} was logged in", token.getEmail());
-
-        return new ResponseEntity<>(Map.of("user", token.getEmail()), HttpStatus.OK);
+//        if (!token.getAuthorities().contains(new SimpleGrantedAuthority("Display"))) {
+//            log.info("User {} was denied entry", token.getEmail());
+//            throw new NotAuthorizedException("This operation requires \"Display\" scope");
+//        }
+//
+//        log.info("User {} was logged in", token.getEmail());
+//
+//        return new ResponseEntity<>(Map.of("user", token.getEmail()), HttpStatus.OK);
+        return ResponseEntity.ok().body("/");
     }
 
     @GetMapping(path = "/check-destination", produces = MediaType.APPLICATION_JSON_VALUE)

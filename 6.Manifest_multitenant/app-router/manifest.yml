@@ -1,6 +1,7 @@
 ---
 applications:
   - name: app-router
+    host: app-router
     routes:
       - route: app-router.cfapps.us10-001.hana.ondemand.com
 #    random-route: true
