@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Parent POM (Spring Boot) -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.7</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- Project coordinates -->
+    <groupId>com.example</groupId>
+    <artifactId>project-root</artifactId>
+    <version>1</version>
+    <packaging>pom</packaging>
+
+    <name>Project Root</name>
+    <description>Multi-module SAP Cloud Foundry project</description>
+
+    <!-- Common configuration shared across modules -->
+    <properties>
+        <java.version>21</java.version>
+        <spring.boot.version>3.5.7</spring.boot.version>
+    </properties>
+
+    <!-- Optional: dependency management for consistent versions -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- List of modules in this project -->
+    <modules>
+        <module>product-service</module>
+    </modules>
+
+</project>

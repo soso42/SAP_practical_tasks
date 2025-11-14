@@ -1,0 +1,11 @@
+{
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/product-service/(.*)$",
+      "target": "$1",
+      "destination": "product-service",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}
